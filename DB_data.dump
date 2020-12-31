@@ -1,0 +1,211 @@
+DROP DATABASE IF EXISTS newproject;
+CREATE DATABASE newproject;
+USE newproject; 
+
+
+CREATE TABLE Book
+(
+	book_num             INTEGER NOT NULL,
+	product_num          INTEGER NOT NULL,
+	member_id            VARCHAR(20) NOT NULL,
+	book_date            DATE NULL,
+	book_people          INTEGER NULL
+);
+
+ALTER TABLE Book
+ADD PRIMARY KEY (book_num,product_num,member_id);
+
+CREATE TABLE Country
+(
+	country_num          INTEGER NOT NULL,
+	country_name         VARCHAR(20) NOT NULL
+);
+
+ALTER TABLE Country
+ADD PRIMARY KEY (country_num,country_name);
+
+CREATE TABLE LandMark
+(
+	landmark_name        VARCHAR(20) NOT NULL,
+	area                 VARCHAR(20) NULL
+);
+
+ALTER TABLE LandMark
+ADD PRIMARY KEY (landmark_name);
+
+CREATE TABLE Member
+(
+	member_id            VARCHAR(20) NOT NULL,
+	member_pw            VARCHAR(20) NULL,
+	member_name          VARCHAR(20) NULL,
+	member_ph            VARCHAR(20) NULL
+);
+
+ALTER TABLE Member
+ADD PRIMARY KEY (member_id);
+
+CREATE TABLE ProductInfo
+(
+	product_num          INTEGER NOT NULL,
+	theme_num            INTEGER NULL,
+	theme_name           VARCHAR(20) NULL,
+	country_num          INTEGER NULL,
+	country_name         VARCHAR(20) NULL,
+	landmark_name        VARCHAR(20) NULL,
+	product_price        INTEGER NULL
+);
+
+ALTER TABLE ProductInfo
+ADD PRIMARY KEY (product_num);
+
+CREATE TABLE Theme
+(
+	theme_num            INTEGER NOT NULL,
+	theme_name           VARCHAR(20) NOT NULL
+);
+
+ALTER TABLE Theme
+ADD PRIMARY KEY (theme_num,theme_name);
+
+ALTER TABLE Book
+ADD FOREIGN KEY (product_num) REFERENCES ProductInfo (product_num);
+
+ALTER TABLE Book
+ADD FOREIGN KEY (member_id) REFERENCES Member (member_id);
+
+ALTER TABLE ProductInfo
+ADD FOREIGN KEY (theme_num, theme_name) REFERENCES Theme (theme_num, theme_name);
+
+ALTER TABLE ProductInfo
+ADD FOREIGN KEY (country_num, country_name) REFERENCES Country (country_num, country_name);
+
+ALTER TABLE ProductInfo
+ADD FOREIGN KEY (landmark_name) REFERENCES LandMark (landmark_name);
+
+CREATE INDEX prod_theme ON productinfo(theme_name);
+CREATE INDEX prod_country ON productinfo(country_name);
+
+CREATE VIEW Vbook_detail(book_no, id, user_name, date, theme, country, landmark, people)
+	AS SELECT book.book_num, member.member_id, member.member_name, 
+		book.book_date, productinfo.theme_name, productinfo.country_name,
+		productinfo.landmark_name, book.book_people
+	FROM member, book, productinfo
+	WHERE book.member_id=member.member_id AND book.product_num=productinfo.product_num;
+ 
+
+INSERT INTO landmark VALUES ('남산 서울타워','서울시');
+INSERT INTO landmark VALUES ('가평 레일파크','경기도 가평군');
+INSERT INTO landmark VALUES ('한국 전쟁기념관','서울시');
+INSERT INTO landmark VALUES ('섭지코지','제주도 서귀포시');
+INSERT INTO landmark VALUES ('베네시안 마카오 카지노','마카오');
+INSERT INTO landmark VALUES ('만리장성','베이징');
+INSERT INTO landmark VALUES ('중국미술관','베이징');
+INSERT INTO landmark VALUES ('판다동물원','청두');
+INSERT INTO landmark VALUES ('디즈니랜드','도쿄');
+INSERT INTO landmark VALUES ('스노클링','오키나와');
+INSERT INTO landmark VALUES ('온천','후쿠오카');
+INSERT INTO landmark VALUES ('국제만화박물관','교토');
+INSERT INTO landmark VALUES ('랜드마크81 타워','호치민');
+INSERT INTO landmark VALUES ('베트남 전쟁박물관','호치민');
+INSERT INTO landmark VALUES ('윈드서핑','무이네');
+INSERT INTO landmark VALUES ('닌반베이','냐짱');
+INSERT INTO landmark VALUES ('그랜드캐니언','힐링');
+INSERT INTO landmark VALUES ('자유의 여신상','뉴욕');
+INSERT INTO landmark VALUES ('자연사 박물관','뉴욕');
+INSERT INTO landmark VALUES ('국립예술관','워싱턴');
+INSERT INTO landmark VALUES ('노트르담 성당','몬트리올');
+INSERT INTO landmark VALUES ('스키','밴프 로키산맥');
+INSERT INTO landmark VALUES ('케이프 브레턴 아일랜드','노바스코샤');
+INSERT INTO landmark VALUES ('인류학 박물관','벤쿠버');
+INSERT INTO landmark VALUES ('라고아 두 빠라이수','제리코아코아코아라');
+INSERT INTO landmark VALUES ('그리스도상','리우데자네이루');
+INSERT INTO landmark VALUES ('예술마을','엥부다스');
+INSERT INTO landmark VALUES ('브라질 축구박물관','상파울루');
+INSERT INTO landmark VALUES ('스쿠버다이빙','케언즈');
+INSERT INTO landmark VALUES ('국립해양박물관','시드니');
+INSERT INTO landmark VALUES ('서퍼스 파라다이스','골드코스트');
+INSERT INTO landmark VALUES ('오페라하우스','시드니');
+INSERT INTO landmark VALUES ('타워브릿지','런던');
+INSERT INTO landmark VALUES ('버킹엄 궁전','런던');
+INSERT INTO landmark VALUES ('스톤헨지','아임즈베리');
+INSERT INTO landmark VALUES ('영국 국립예술관','런던');
+INSERT INTO landmark VALUES ('낙동강 레프팅','경상북도 봉화군');
+INSERT INTO landmark VALUES ('다이브랜드','제주도 서귀포시');
+INSERT INTO landmark VALUES ('당항포 요트체험','경상남도 고성군');
+INSERT INTO landmark VALUES ('화성 행군','경기도 수원시');
+INSERT INTO landmark VALUES ('판문점','경기도 파주시');
+INSERT INTO landmark VALUES ('국립현대미술관','경기도 과천시');
+INSERT INTO landmark VALUES ('부산 현대미술관','부산광역시 사하구');
+INSERT INTO landmark VALUES ('거문오름','제주도 제주시');
+INSERT INTO landmark VALUES ('국립 산음자연휴양림','경기도 양평군');
+INSERT INTO landmark VALUES ('남이 자연휴양림','충청남도 금산군');
+
+INSERT INTO country VALUES (1,'대한민국');
+INSERT INTO country VALUES (2,'중국');
+INSERT INTO country VALUES (3,'일본');
+INSERT INTO country VALUES (4,'베트남');
+INSERT INTO country VALUES (5,'미국');
+INSERT INTO country VALUES (6,'캐나다');
+INSERT INTO country VALUES (7,'브라질');
+INSERT INTO country VALUES (8,'호주');
+INSERT INTO country VALUES (9,'영국');
+
+INSERT INTO theme VALUES (101,'관광');
+INSERT INTO theme VALUES (102,'레포츠');
+INSERT INTO theme VALUES (103,'힐링');
+INSERT INTO theme VALUES (104,'역사');
+INSERT INTO theme VALUES (105,'예술');
+
+INSERT INTO productinfo VALUES (10001,101,'관광',1,'대한민국','남산 서울타워',30000);
+INSERT INTO productinfo VALUES (10002,102,'레포츠',1,'대한민국','가평 레일파크',40000);
+INSERT INTO productinfo VALUES (10003,104,'역사',1,'대한민국','한국 전쟁기념관',9000);
+INSERT INTO productinfo VALUES (10004,103,'힐링',1,'대한민국','섭지코지',12000);
+INSERT INTO productinfo VALUES (10005,101,'관광',2,'중국','베네시안 마카오 카지노',13000);
+INSERT INTO productinfo VALUES (10006,104,'역사',2,'중국','만리장성',11000);
+INSERT INTO productinfo VALUES (10007,105,'예술',2,'중국','중국미술관',15000);
+INSERT INTO productinfo VALUES (10008,103,'힐링',2,'중국','판다동물원',33000);
+INSERT INTO productinfo VALUES (10009,101,'관광',3,'일본','디즈니랜드',53000);
+INSERT INTO productinfo VALUES (10010,102,'레포츠',3,'일본','스노클링',40000);
+INSERT INTO productinfo VALUES (10011,103,'힐링',3,'일본','온천',18000);
+INSERT INTO productinfo VALUES (10012,105,'예술',3,'일본','국제만화박물관',8000);
+INSERT INTO productinfo VALUES (10013,101,'관광',4,'베트남','랜드마크81 타워',17000);
+INSERT INTO productinfo VALUES (10014,104,'역사',4,'베트남','베트남 전쟁박물관',2000);
+INSERT INTO productinfo VALUES (10015,102,'레포츠',4,'베트남','윈드서핑',41000);
+INSERT INTO productinfo VALUES (10016,103,'힐링',4,'베트남','닌반베이',10000);
+INSERT INTO productinfo VALUES (10017,103,'힐링',5,'미국','그랜드캐니언',29000);
+INSERT INTO productinfo VALUES (10018,101,'관광',5,'미국','자유의 여신상',30000);
+INSERT INTO productinfo VALUES (10019,104,'역사',5,'미국','자연사 박물관',12000);
+INSERT INTO productinfo VALUES (10020,105,'예술',5,'미국','국립예술관',10000);
+INSERT INTO productinfo VALUES (10021,101,'관광',6,'캐나다','노트르담 성당',12000);
+INSERT INTO productinfo VALUES (10022,102,'레포츠',6,'캐나다','스키',90000);
+INSERT INTO productinfo VALUES (10023,103,'힐링',6,'캐나다','케이프 브레턴 아일랜드',78000);
+INSERT INTO productinfo VALUES (10024,104,'역사',6,'캐나다','인류학 박물관',10000);
+INSERT INTO productinfo VALUES (10025,103,'힐링',7,'브라질','라고아 두 빠라이수',10000);
+INSERT INTO productinfo VALUES (10026,101,'관광',7,'브라질','그리스도상',11000);
+INSERT INTO productinfo VALUES (10027,105,'예술',7,'브라질','예술마을',30000);
+INSERT INTO productinfo VALUES (10028,104,'역사',7,'브라질','브라질 축구박물관',17000);
+INSERT INTO productinfo VALUES (10029,102,'레포츠',8,'호주','스쿠버다이빙',110000);
+INSERT INTO productinfo VALUES (10030,104,'역사',8,'호주','국립해양박물관',10000);
+INSERT INTO productinfo VALUES (10031,103,'힐링',8,'호주','서퍼스 파라다이스',12000);
+INSERT INTO productinfo VALUES (10032,101,'관광',8,'호주','오페라하우스',40000);
+INSERT INTO productinfo VALUES (10033,101,'관광',9,'영국','타워브릿지',23000);
+INSERT INTO productinfo VALUES (10034,104,'역사',9,'영국','버킹엄 궁전',80000);
+INSERT INTO productinfo VALUES (10035,103,'힐링',9,'영국','스톤헨지',11000);
+INSERT INTO productinfo VALUES (10036,105,'예술',9,'영국','영국 국립예술관',49000);
+INSERT INTO productinfo VALUES (10037,102,'레포츠',1,'대한민국','낙동강 레프팅',8000);
+INSERT INTO productinfo VALUES (10038,102,'레포츠',1,'대한민국','다이브랜드',22000);
+INSERT INTO productinfo VALUES (10039,102,'레포츠',1,'대한민국','당항포 요트체험',48000);
+INSERT INTO productinfo VALUES (10040,104,'역사','1','대한민국','화성 행군',3000);
+INSERT INTO productinfo VALUES (10041,104,'역사',1,'대한민국','판문점',2500);
+INSERT INTO productinfo VALUES (10042,105,'예술',1,'대한민국','국립현대미술관',4000);
+INSERT INTO productinfo VALUES (10043,105,'예술',1,'대한민국','부산 현대미술관',6000);
+INSERT INTO productinfo VALUES (10044,103,'힐링',1,'대한민국','거문오름',3000);
+INSERT INTO productinfo VALUES (10045,103,'힐링',1,'대한민국','국립 산음자연휴양림',35000);
+INSERT INTO productinfo VALUES (10046,103,'힐링',1,'대한민국','남이 자연휴양림',50000);
+
+
+
+
+
+
+ 
