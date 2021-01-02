@@ -1,0 +1,73 @@
+<?
+include("./dbconn.php")
+?>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html>
+  <head>
+    <title>로그인 화면</title>
+    <script type="text/javascript">
+      function loginCheck() {
+// 아이디와 비밀번호를 입력받은 후
+// 존재하는 아이디이며 비밀번호가 아이디와 일치하면 로그인
+// 아니라면 알림창을 띄움
+//로그인 성공시 메인 화면으로 이동
+        if(!document.loginInfo.user_id.value){
+          alert('아이디를 입력해주세요.');
+          document.loginInfo.user_id.focus();
+          return;
+        }
+        if(!document.loginInfo.user_pw.value){
+          alert('비밀번호를 입력해주세요.');
+          document.loginInfo.user_pw.focus();
+          return;
+        }
+        /*if(입력된 아이디가 회원 테이블에 없으면){
+          alert('등록되지 않은 아이디입니다.');
+          return;
+        }
+        if(아이디와 비밀번호가 일치하지 않으면){
+          alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+        }*/
+        document.loginInfo.submit();
+      }
+
+      </script>
+  </head>
+
+  <style>
+  body{
+  background: #343d46;
+  background-image:url('map.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size:1200px 700px;
+  }
+
+  a:link{color:#E0F8F1}
+  a:visited{color:#E0F8F1}
+
+  </style>
+
+  <body>
+
+    <form method="post" action="login.php" name="loginInfo">
+      <fieldset style="position: absolute; left: 650px; top: 140px;">
+          <legend style="font-weight: bold; font-size: 19px; color:white;">로그인</legend><br>
+            <label style="color:white;">ID   : <input type="text" name="user_id" size="30" style="width: 100px; height: 30px;" placeholder="ID"/><br>
+            <label style="color:white;">PW: <input type="password" name="user_pw" size="30" style="width: 100px; height: 30px;" placeholder="******"/><br>
+              <br>
+            <input type="button" style="width: 70px; height: 28px;" value="로그인" onclick="loginCheck();"/>
+      </fieldset>
+    </form>
+
+
+    <div style="position: absolute; left: 1070px; top: 150px;">
+      <p style="font-style: italic; font-size: 18px; color:white;">아직 회원이 아니신가요?</p>
+      <a href="sign_up.html" style="width: 70px; height: 28px;" value="회원가입">회원가입</a>
+    </div>
+
+
+
+  </body>
+</html>

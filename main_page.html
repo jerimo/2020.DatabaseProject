@@ -1,0 +1,47 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html>
+  <head>
+    <title>홈 화면</title>
+    <script type="text/javascript">
+
+      </script>
+  </head>
+
+  <style>
+  body{
+  background: #343d46;
+  background-image:url('map.png');
+  background-repeat: no-repeat;
+  background-size:1200px 700px;
+  }
+
+  a:link{color:#04B4AE}
+  a:visited{color:#088A85}
+
+
+  </style>
+
+  <body>
+  	<form method="post" action="search.php" name="contry_theme_Search">
+      <h1 style="position: absolute; left: 650px; top: 100px; color:white;">여행 상품 검색</h1><br>
+      <div class="box" style="position: absolute; left: 500px; top: 210px;">
+        <input type="text" name="country" style="width: 250px; height: 40px;" placeholder="나라 이름을 입력하세요."/>
+        <select name="theme" style="width: 120px; height: 38px;">
+          <option value="no_theme" selected="selected">테마 지정 안함</option>
+          <option value="관광">관광</option>
+          <option value="레포츠">레포츠</option>
+          <option value="힐링">힐링</option>
+          <option value="역사">역사</option>
+          <option value="예술">예술</option>
+        <input type="submit" style="width: 50px; height: 38px;" value="검색">
+      </div>
+
+      <div style="position: absolute; left: 1070px; top: 250px;">
+        <p style="font-style: italic; font-size: 18px; color:white;">예약하신 여행 일정이 궁금하세요?</p>
+      <a href="booking_status.html" style="width: 70px; height: 28px;" value="예약현황">예약현황</a>
+      </div>
+    </form>
+
+
+  </body>
+</html>

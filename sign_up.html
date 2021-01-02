@@ -1,0 +1,57 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>회원가입</title>
+
+  <script type="text/javascript">
+    function checkForm() {
+//아이디 중복시 가입이 불가능해야하므로, 이미 존재하는 아이디 입니다. 알림 띄움
+// 가입하기 버튼 누르면 모든 일 마치고 메인 화면으로 돌아감
+
+
+    }
+  </script>
+
+
+</head>
+<style>
+body{
+background: #343d46;
+background-image:url('map.png');
+background-repeat: no-repeat;
+background-position: center top;
+background-size:1200px 700px;
+}
+</style>
+<body>
+	<form method="post" action="member.php">
+		<h1 style="position: absolute; left: 600px; top: 100px; color:white;">회원가입</h1><br>
+    <fieldset style="position: absolute; left: 600px; top: 180px;">
+				<legend style="color:white;">입력사항</legend>
+					<table>
+						<tr>
+							<td style="color:white;">아이디</td>
+							<td><input type="text" size="35" name="userid" placeholder="abcd123"></td>
+						</tr>
+						<tr>
+							<td style="color:white;">비밀번호</td>
+							<td><input type="password" size="35" name="userpw" placeholder="****"></td>
+						</tr>
+						<tr>
+							<td style="color:white;">이름</td>
+							<td><input type="text" size="35" name="name" placeholder="김디비"></td>
+						</tr>
+						<tr>
+							<td style="color:white;">전화번호</td>
+							<td><input type="text" size="35" name="phoneNum" placeholder="010XXXXXXXX"></td>
+						</tr><br>
+
+					</table>
+
+				<br><input type="submit" value="가입하기" onclick="checkForm();" />
+      </fieldset>
+
+	</form>
+</body>
+</html>

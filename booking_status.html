@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>예약 현황</title>
+
+</head>
+
+
+<style>
+body{
+background: #343d46;
+background-image:url('map.png');
+background-repeat: no-repeat;
+background-position: center top;
+background-size:1200px 700px;
+}
+a:link{color: white}
+a:visited{color: white}
+</style>
+
+
+<body>
+  <form method="post" name="search_id" action="booking_status.php">
+		<h1 style="position: absolute; left: 650px; top: 100px; color:white;">예약 현황 검색</h1><br>
+    <input type="text" name="user_id" style="position: absolute; left: 600px; top: 200px; width: 230px; height: 30px;" placeholder="아이디를 입력해 주세요."/>
+    <input type="submit" style="position: absolute; left: 850px; top: 200px; width: 50px; height: 30px;" value="검색" onclick="checkForm();"/>
+  </form>
+
+  <a href="main_page.html" style="position: absolute; left: 1000; top: 450; width: 170px; height: 28px;" value="메인화면">메인화면으로 돌아가기</a>
+
+</body>
+</html>
